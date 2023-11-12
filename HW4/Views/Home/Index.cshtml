@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    @if (!User.Identity!.IsAuthenticated)
+    {
+        <p>To encrypt your messages with Caesar or Vigenere cypher <a href="/Identity/Account/Login" style="text-decoration: none">Login</a> or <a style="text-decoration: none"href="/Identity/Account/Register">Register</a></p>
+    }
+</div>

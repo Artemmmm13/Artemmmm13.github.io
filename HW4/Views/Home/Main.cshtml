@@ -1,0 +1,157 @@
+@{
+    ViewData["Title"] = "Main";
+}
+
+<div class="container text-center mt-5">
+    <h1 class="display-4">Encryption Tool</h1>
+    <p class="lead">Encrypt your messages with Caesar or Vigenere cipher</p>
+
+    <form id="encryptionForm" methsod="post" action="#" class="my-4">
+        <div class="form-group">
+            <label for="cipherType">Choose Cipher Type:</label>
+            <select class="form-control" name="cipherType" id="cipherType">
+                <option value="Caesar">Caesar</option>
+                <option value="Vigenere">Vigenere</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="inputText">Input Text:</label>
+            <input type="text" class="form-control" name="inputText" id="inputText" required>
+        </div>
+
+        <div id="shiftKeyContainer" class="form-group">
+            <label for="shiftKey">Shift Amount (as Integer):</label>
+            <input type="number" class="form-control" name="shiftKey" id="shiftKey" min="-256" max="256">
+        </div>
+
+        <div id="vigenereKeyContainer" class="form-group" style="display:none;">
+            <label for="vigenereKey">Vigenere Key:</label>
+            <input type="text" class="form-control" name="vigenereKey" id="vigenereKey">
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="encrypt()">Encrypt</button>
+    </form>
+
+    <div id="resultContainer" class="form-group">
+        <label for="resultMessage">Result Message:</label>
+        <textarea class="form-control" id="resultMessage" style="resize: none; background-color: white" readonly></textarea>
+    </div>
+
+</div>
+
+<div id="errorContainer" class="alert alert-danger" style="display:none;"></div>
+
+<script>
+    function displayError(message) {
+        var errorContainer = document.getElementById('errorContainer');
+        errorContainer.innerHTML = message;
+        errorContainer.style.display = 'block';
+    }
+    
+     document.getElementById('cipherType').addEventListener('change', function () {
+            var cipherType = this.value;
+            var shiftKeyContainer = document.getElementById('shiftKeyContainer');
+            var vigenereKeyContainer = document.getElementById('vigenereKeyContainer');
+    
+            if (cipherType === 'Caesar') {
+                shiftKeyContainer.style.display = 'block';
+                vigenereKeyContainer.style.display = 'none';
+            } else if (cipherType === 'Vigenere') {
+                shiftKeyContainer.style.display = 'none';
+                vigenereKeyContainer.style.display = 'block';
+            }
+        });
+   
+
+    function encrypt() {
+        var cipherType = document.getElementById('cipherType').value;
+        var inputText = document.getElementById('inputText').value;
+        var shiftKey = document.getElementById('shiftKey').value;
+        var vigenereKey = document.getElementById('vigenereKey').value;
+
+        if (inputText.trim().length === 0) {
+            displayError("Please enter a non-empty message");
+            return;
+        }
+        // Check if shiftKey is an integer
+        if (isNaN(parseInt(shiftKey)) && cipherType === 'Caesar') {
+            displayError("Please enter an integer for the shift key");
+            return;
+        }
+
+        if (shiftKey < -256 || shiftKey > 256) {
+            displayError("Please enter a shift key in the range -256 to 256");
+            return;
+        }
+        
+        
+        if (shiftKey < 0) {
+            shiftKey+=256;
+        }
+        
+        if (!isNaN(parseInt(vigenereKey)) && cipherType === 'Vigenere'){
+            displayError("Please enter Vigenere encryption key as a string");
+            return;
+        }
+
+        if (vigenereKey.trim().length < 1 && cipherType === 'Vigenere') {
+            displayError("Please enter a Vigenere key with a length of at least 1");
+            return;
+        }
+        
+        if (vigenereKey.trim.length !== inputText.trim.length){
+            displayError("Make sure that your Vigenere key is of the same value as the ")
+        }
+
+        // Clear any previous error messages
+        document.getElementById('errorContainer').style.display = 'none';
+
+        function caesarCipher(inputText, shiftKey) {
+            const encoder = new TextEncoder();
+            const utf8Bytes = encoder.encode(inputText);
+            const shiftedBytes = new Uint8Array(utf8Bytes.length);
+        
+            for (let i = 0; i < shiftedBytes.length; i++) {
+                shiftedBytes[i] = (utf8Bytes[i] + shiftKey) % 256;
+            }
+        
+            return btoa(String.fromCharCode.apply(null, shiftedBytes));
+        }
+        
+        function adjustVigenereKey(inputText, vigenereKey) {
+          if (vigenereKey.length === inputText.length) {
+            return vigenereKey;
+          }
+        
+          if (vigenereKey.length < inputText.length) {
+            const repeatedKey = vigenereKey.repeat(Math.ceil(inputText.length / vigenereKey.length));
+            return repeatedKey.slice(0, inputText.length);
+          }
+     
+          if (vigenereKey.length > inputText.length) {
+            return vigenereKey.slice(0, inputText.length);
+          }
+        }
+
+        function vigenereCipher(inputText, vigenereKey) {
+            const encoder = new TextEncoder();
+            const utf8Bytes = encoder.encode(inputText);
+            const shiftedBytes = new Uint8Array(utf8Bytes.length);
+            vigenereKey = adjustVigenereKey(inputText, vigenereKey);
+            const keyBytes = encoder.encode(vigenereKey);
+            
+            
+            for (i = 0; i < shiftedBytes.length; i++){
+                shiftedBytes[i] = (keyBytes[i] + utf8Bytes[i]) % 256
+            }
+            
+            return btoa(String.fromCharCode.apply(null, shiftedBytes));
+
+        }
+
+        var encryptedMessage = cipherType === 'Caesar' ? caesarCipher(inputText, shiftKey) : vigenereCipher(inputText, vigenereKey);
+        
+        document.getElementById('resultMessage').value = encryptedMessage;
+    }
+</script>

@@ -1,0 +1,44 @@
+@model HW4.Models.UserEncryptedTextMapping
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UserToEncryptedTextMappingId" />
+            <div class="form-group">
+                <label asp-for="UserToEncryptedTextMappingId" class="control-label"></label>
+                <input asp-for="UserToEncryptedTextMappingId" class="form-control" />
+                <span asp-validation-for="UserToEncryptedTextMappingId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TextCreatorId" class="control-label"></label>
+                <input asp-for="TextCreatorId" class="form-control" />
+                <span asp-validation-for="TextCreatorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EncryptedText" class="control-label"></label>
+                <input asp-for="EncryptedText" class="form-control" />
+                <span asp-validation-for="EncryptedText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

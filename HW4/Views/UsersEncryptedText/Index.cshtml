@@ -1,0 +1,47 @@
+@model IEnumerable<HW4.Models.UserEncryptedTextMapping>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserToEncryptedTextMappingId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TextCreatorId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EncryptedText)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserToEncryptedTextMappingId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TextCreatorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EncryptedText)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.UserToEncryptedTextMappingId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TextCreatorId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EncryptedText">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
