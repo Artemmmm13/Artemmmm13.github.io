@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dBm10u8j54GLISEymy6PpOeZQfgsBvhcvjEeBaHJ3BgDEKzoNYMT+Ml0jKx5oAi9fKaaUVjYk9N0TMMFjo3oyQ==",
+  "dgSpecHash": "igMoI7darycNHBFxarhtQjB6jERNVOvZaH6c11IMklXbJb8rIO3wAtmweDX0y/5QA9ukIyNVXHLaXu/F+WdDIg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin_007\\RiderProjects\\WebAppSec2023\\HW4\\HW4.csproj",
+  "projectFilePath": "C:\\Users\\Admin_007\\ics0031-2023f\\HW4\\HW4.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin_007\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Admin_007\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

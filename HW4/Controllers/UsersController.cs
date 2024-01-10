@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HW4.Data;
 using HW4.Models;
+using SQLitePCL;
 
 namespace HW4.Controllers
 {
@@ -18,9 +19,17 @@ namespace HW4.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-              return _context.Users != null ? 
-                          View(await _context.Users.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Users'  is null.");
+            var userEmail = "admin@owasp2023.com";
+            var isAdminUser = await _context.Users.AnyAsync(u => u.Email == userEmail);
+
+            if (isAdminUser)
+            {
+                return _context.Users != null ? 
+                    View(await _context.Users.ToListAsync()) :
+                    Problem("Entity set 'ApplicationDbContext.Users'  is null.");
+            }
+
+            return NotFound();
         }
 
         // GET: Users/Details/5

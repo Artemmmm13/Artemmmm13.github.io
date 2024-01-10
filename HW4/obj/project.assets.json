@@ -12053,11 +12053,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin_007\\RiderProjects\\WebAppSec2023\\HW4\\HW4.csproj",
+      "projectUniqueName": "C:\\Users\\Admin_007\\ics0031-2023f\\HW4\\HW4.csproj",
       "projectName": "HW4",
-      "projectPath": "C:\\Users\\Admin_007\\RiderProjects\\WebAppSec2023\\HW4\\HW4.csproj",
+      "projectPath": "C:\\Users\\Admin_007\\ics0031-2023f\\HW4\\HW4.csproj",
       "packagesPath": "C:\\Users\\Admin_007\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin_007\\RiderProjects\\WebAppSec2023\\HW4\\obj\\",
+      "outputPath": "C:\\Users\\Admin_007\\ics0031-2023f\\HW4\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin_007\\AppData\\Roaming\\NuGet\\NuGet.Config"
