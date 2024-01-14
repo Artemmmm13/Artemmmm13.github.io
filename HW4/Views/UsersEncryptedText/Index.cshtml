@@ -1,8 +1,19 @@
 @model IEnumerable<HW4.Models.UserEncryptedTextMapping>
 
+@functions {
+    bool IsAdminOwaspEmail(string email)
+    {
+        string pattern = @"^admin\d{3}@owasp\.com$";
+        
+        System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        return regex.IsMatch(email);
+    }
+}
+
+
 @{
     ViewData["Title"] = "Index";
-    bool userHasAccess = User.Identity.IsAuthenticated && User.Identity.Name == "admin@owasp2023.com";
+    bool userHasAccess = User.Identity.IsAuthenticated && IsAdminOwaspEmail(User.Identity.Name);
 }
 
 
